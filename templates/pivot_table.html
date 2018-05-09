@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block script %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        {% include '_pivot_table_nav.html' %}
+        <div class="row" id="pivot_table_html">
+
+        </div>
+        <div class="row">
+            <div class="" id="content-inner">
+                <table id="pivot_table" lay-filter='table'></table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/layui_js.js"></script>
+    <script src="/static/js/pivot_table_js.js"></script>
+{% endblock %}

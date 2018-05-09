@@ -1,0 +1,117 @@
+
+<div class="content-nav">
+    <div class="row">
+        <div class="col-md-3"><div class="panel panel-default panel-primary panelstyle">
+            <div class="panel-heading">①数据上传</div>
+            <div class="panel-body">
+                <div class="datas-file">
+                    <form id="dataform" name="dataform" method="post" action="{% url 'data-input' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row file-up-inner">
+                            <div class="col-xs-4" style="text-align: right">
+                                <button class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">选择账户</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <select id="account1" class="selectpicker form-control" name="account1" data-live-search="false"></select>
+                            </div>
+                        </div>
+                        <div class="row file-up-inner">
+                            <div class="col-xs-4" style="text-align: right">
+                                <button class="btn btn-success" style="width: 80px" type="button" value="上传csv数据"  onclick="document.dataform.datacsv.click()">csv数据</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="file" name="datacsv" id="datacsv" style="display:none" onChange="document.dataform.dataname1.value=this.value">
+                                <input name="dataname1" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="row file-up-inner">
+                            <div class="col-xs-4" style="text-align: right">
+                                <button class="btn btn-success" style="width: 80px" type="button" value="上传运费数据"  onclick="document.dataform.dataxlsx.click()">运费数据</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="file" name="dataxlsx" id="dataxlsx" style="display:none" onChange="document.dataform.dataname2.value=this.value">
+                                <input id="f_upload" class="form-control"name="dataname2" readonly>
+                            </div>
+                        </div>
+                        <div class="row file-up-inner">
+                            <div class="col-xs-4" style="text-align: right">
+                                <button  id="datainput" style="width: 80px" type="button" class="btn btn-success">上传数据</button>
+                            </div>
+                            <div class="col-xs-6" style="line-height: 34px">
+                                <span id="panel1"  class="panel-msg">上传数据中，请稍等</span>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div></div>
+        <div class="col-md-3">
+            <div class="panel panel-default panel-primary panelstyle">
+                <div class="panel-heading">②解析构图</div>
+                <div class="panel-body">
+                    <div class="row file-up-inner">
+                        <div class="col-xs-4" style="text-align: right">
+                            <button class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">选择账户</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <select id="account2" class="selectpicker form-control" name="account2" style="width: 150px" data-live-search="false"></select>
+                        </div>
+                    </div>
+                    <div class="row file-up-inner">
+                        <div class="col-xs-4" style="text-align: right">
+                            <button id="dataparsing" class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">解析数据</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <span id="panel2_1"  class="panel-msg panel-msg-height">解析数据中，请稍等</span>
+                        </div>
+                    </div>
+                    <div class="row file-up-inner">
+                        <div class="col-xs-4" style="text-align: right">
+                            <button class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">图表类型</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <select id="chart_type" class="selectpicker form-control" name="charts2" style="z-index: 20" data-live-search="false" multiple></select>
+                        </div>
+                    </div>
+                    <div class="row file-up-inner">
+                        <div class="col-xs-4" style="text-align: right">
+                            <input id="datainput2" style="width: 80px" class="btn btn-success" type="button" value="选择构图">
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="panel2">
+                                <span id="panel2_2" class="panel-msg panel-msg-height"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"><div class="panel panel-default panel-primary panelstyle">
+            <div class="panel-heading">③系列一览 <i id="panel-btn-3" class="fa fa-refresh fa-1x "></i></div>
+            <div class="panel-body">
+                <div class="datas-file">
+                    <div class="sku-list" id="sku_list">
+
+                    </div>
+                </div>
+            </div>
+        </div></div>
+        <div class="col-md-3"><div class="panel panel-default panel-primary panelstyle">
+            <div class="panel-heading">④选择系列</div>
+            <div class="panel-body">
+                <div class="datas-file">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="sku_id" id="sku_id"  placeholder="请输入你想查询的系列号,如 : YSW5402,YSW1623"
+                                   value="">
+                        </div>
+                        <button type="button"  id="sku_id_btn" class="btn btn-success">构图</button>
+                        <span id="panel_span_4"></span>
+                    </form>
+                </div>
+            </div>
+        </div></div>
+    </div>
+
+</div>

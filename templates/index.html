@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block script %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        {% if request.user.is_authenticated %}
+            {% include '_charts_content_nav.html' %}
+        {% endif %}
+        {% for chart_name in chart_name_list %}
+            <div class="content-inner" id="content-inner">
+                <div class="row">
+
+                    <div class="col-md-12" style="height:600px !important">
+                        {% include chart_name %}
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

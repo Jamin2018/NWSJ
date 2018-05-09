@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block script %}
+    <link rel="stylesheet" href="/static/plugins/bootstrap-fileinput-master/css/fileinput.min.css">
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="content">
+        {% include '_charts_content_nav.html' %}
+        <div class="content-inner" id="content-inner">
+            <div class="row">
+                {% for chart_name in chart_name_list %}
+                    <div class="col-md-6" style="margin-bottom: 20px">
+                        {% include chart_name %}
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="/static/plugins/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+    <script src="/static/plugins/jq/jquery-1.12.4.js"></script>
+    <script src="/static/plugins/bootstrap/js/bootstrap.js"></script>
+    <script src="/static/js/myjs.js"></script>
+{% endblock %}

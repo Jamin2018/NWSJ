@@ -1,0 +1,78 @@
+
+<form class="layui-form layui-form-pane">
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label ">日期范围</label>
+                <div class="layui-input-block">
+                    <input type="text" class="layui-input" id="privot_date" required="" lay-verify="" autocomplete="off" name="date">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">账户</label>
+                <div class="layui-input-block" >
+                    <select id="privot_account" name="account" lay-filter ="account">
+                        <option value=".*">选择账户</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">品类</label>
+                <div class="layui-input-block" >
+                    <select id="privot_category" name="category" lay-filter ="category">
+                        <option value=".*">选择品类</option>
+                        <option value="neiyi">内衣</option>
+                        <option value="yongyi">泳衣</option>
+                        <option value="shangyi">上衣</option>
+                        <option value="xiuxianku">休闲裤</option>
+                        <option value="shatangku">沙滩裤</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="layui-form-item">
+                <label class="layui-form-label">SKU</label>
+                <div class="layui-input-block">
+                    <select class="" name="style" lay-filter="style" id="privot_style">
+                        <option value=".*">选择style</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">颜色</label>
+                <div class="layui-input-block">
+                    <select name="color" lay-filter="color" id="privot_color">
+                        <option value=".*">选择color</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">码数</label>
+                <div class="layui-input-block">
+                    <select name="size" lay-filter="size" id="privot_size">
+                        <option value=".*">选择size</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</form>

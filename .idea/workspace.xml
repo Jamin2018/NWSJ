@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b882ece0-403e-44a7-a78c-abbe832e15b6" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/utils/SaveDataToMongoDB.py" afterPath="$PROJECT_DIR$/apps/utils/SaveDataToMongoDB.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,12 +13,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/NWSJ$SaveDataToMongoDB.coverage" NAME="SaveDataToMongoDB Coverage Results" MODIFIED="1525861984483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
     <SUITE FILE_PATH="coverage/NWSJ$111111.coverage" NAME="111111 Coverage Results" MODIFIED="1524877676727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
     <SUITE FILE_PATH="coverage/NWSJ$GetSkuColor.coverage" NAME="GetSkuColor Coverage Results" MODIFIED="1525256558474" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
-    <SUITE FILE_PATH="coverage/NWSJ$PivotTable.coverage" NAME="PivotTable Coverage Results" MODIFIED="1524909780030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
     <SUITE FILE_PATH="coverage/NWSJ$111.coverage" NAME="111 Coverage Results" MODIFIED="1524822751660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
     <SUITE FILE_PATH="coverage/NWSJ$test.coverage" NAME="test Coverage Results" MODIFIED="1525920568883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
+    <SUITE FILE_PATH="coverage/NWSJ$SaveDataToMongoDB.coverage" NAME="SaveDataToMongoDB Coverage Results" MODIFIED="1525861984483" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
+    <SUITE FILE_PATH="coverage/NWSJ$PivotTable.coverage" NAME="PivotTable Coverage Results" MODIFIED="1524909780030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/apps/utils" />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -29,9 +30,11 @@
           <file leaf-file-name="SaveDataToMongoDB.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/apps/utils/SaveDataToMongoDB.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="757">
-                  <caret line="143" column="15" lean-forward="false" selection-start-line="143" selection-start-column="15" selection-end-line="143" selection-end-column="15" />
-                  <folding />
+                <state relative-caret-position="780">
+                  <caret line="145" column="16" lean-forward="false" selection-start-line="145" selection-start-column="16" selection-end-line="145" selection-end-column="16" />
+                  <folding>
+                    <marker date="1525923534664" expanded="true" signature="1593:2110" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -39,7 +42,7 @@
           <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apps/Data_analysis_web/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2822">
+                <state relative-caret-position="3320">
                   <caret line="176" column="35" lean-forward="false" selection-start-line="176" selection-start-column="35" selection-end-line="176" selection-end-column="35" />
                   <folding>
                     <element signature="e#25#34#0" expanded="true" />
@@ -51,13 +54,10 @@
           <file leaf-file-name="PivotTable.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apps/utils/PivotTable.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1727">
-                  <caret line="120" column="11" lean-forward="false" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="11" />
+                <state relative-caret-position="1640">
+                  <caret line="92" column="59" lean-forward="false" selection-start-line="92" selection-start-column="59" selection-end-line="92" selection-end-column="59" />
                   <folding>
                     <element signature="e#25#34#0" expanded="true" />
-                    <marker date="1525922990573" expanded="true" signature="8385:9366" ph="..." />
-                    <marker date="1525922990573" expanded="true" signature="9396:9562" ph="..." />
-                    <marker date="1525922990573" expanded="true" signature="9401:9553" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -66,7 +66,7 @@
           <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/apps/utils/test.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="34">
+                <state relative-caret-position="40">
                   <caret line="2" column="8" lean-forward="false" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="9" />
                   <folding />
                 </state>
@@ -80,7 +80,7 @@
           <file leaf-file-name="layui_js.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/static/js/layui_js.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3332">
+                <state relative-caret-position="3920">
                   <caret line="196" column="6" lean-forward="false" selection-start-line="196" selection-start-column="6" selection-end-line="196" selection-end-column="6" />
                   <folding />
                 </state>
@@ -92,7 +92,16 @@
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="189">
                   <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-                  <folding />
+                  <folding>
+                    <marker date="1525855737485" expanded="true" signature="1608:1614" ph=" " />
+                    <marker date="1525855737485" expanded="true" signature="1614:1620" ph=" " />
+                    <marker date="1525855737485" expanded="true" signature="2619:2625" ph=" " />
+                    <marker date="1525855737485" expanded="true" signature="2625:2631" ph=" " />
+                    <marker date="1525855737485" expanded="true" signature="6055:6064" ph="..." />
+                    <marker date="1525855737485" expanded="true" signature="6662:6672" ph="..." />
+                    <marker date="1525855737485" expanded="true" signature="7075:7085" ph="..." />
+                    <marker date="1525855737485" expanded="true" signature="7208:7218" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -100,7 +109,7 @@
           <file leaf-file-name="base.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/static/css/base.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1802">
+                <state relative-caret-position="2120">
                   <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
                   <folding />
                 </state>
@@ -182,11 +191,11 @@
         <option value="$PROJECT_DIR$/static/js/layui_js.js" />
         <option value="$PROJECT_DIR$/static/css/base.css" />
         <option value="$PROJECT_DIR$/templates/_charts_content_nav.html" />
+        <option value="$PROJECT_DIR$/static/js/myjs.js" />
         <option value="$PROJECT_DIR$/apps/utils/PyDataFun.py" />
         <option value="$PROJECT_DIR$/apps/Data_analysis_web/views.py" />
         <option value="$PROJECT_DIR$/apps/utils/test.py" />
         <option value="$PROJECT_DIR$/apps/utils/PivotTable.py" />
-        <option value="$PROJECT_DIR$/static/js/myjs.js" />
         <option value="$PROJECT_DIR$/apps/utils/SaveDataToMongoDB.py" />
       </list>
     </option>
@@ -235,6 +244,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -285,8 +296,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,7 +330,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Django server.NWSJ">
     <configuration name="111111" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -470,7 +479,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -479,7 +488,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="283" y="747" width="1527" height="425" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="790" y="532" width="1527" height="425" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1364562" sideWeight="0.49791667" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -714,10 +723,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="590">
           <caret line="75" column="70" lean-forward="false" selection-start-line="75" selection-start-column="70" selection-end-line="75" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/plotly/offline/offline.py" />
+    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/plotly/offline/offline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="384" column="4" lean-forward="false" selection-start-line="384" selection-start-column="4" selection-end-line="384" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/utils/PyPlotly.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="738">
@@ -727,7 +743,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/layui_js.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3332">
+        <state relative-caret-position="3920">
           <caret line="196" column="6" lean-forward="false" selection-start-line="196" selection-start-column="6" selection-end-line="196" selection-end-column="6" />
           <folding />
         </state>
@@ -735,7 +751,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/css/base.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
+        <state relative-caret-position="2120">
           <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding />
         </state>
@@ -748,7 +764,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/plotly/graph_objs/graph_objs.py" />
+    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/plotly/graph_objs/graph_objs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="1453" column="6" lean-forward="false" selection-start-line="1453" selection-start-column="6" selection-end-line="1453" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/pivot_table.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -774,11 +796,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding>
+            <marker date="1525855737485" expanded="true" signature="1608:1614" ph=" " />
+            <marker date="1525855737485" expanded="true" signature="1614:1620" ph=" " />
+            <marker date="1525855737485" expanded="true" signature="2619:2625" ph=" " />
+            <marker date="1525855737485" expanded="true" signature="2625:2631" ph=" " />
+            <marker date="1525855737485" expanded="true" signature="6055:6064" ph="..." />
+            <marker date="1525855737485" expanded="true" signature="6662:6672" ph="..." />
+            <marker date="1525855737485" expanded="true" signature="7075:7085" ph="..." />
+            <marker date="1525855737485" expanded="true" signature="7208:7218" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/pymongo/mongo_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="81" column="8" lean-forward="false" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Venv_NWSJ/Lib/site-packages/pymongo/mongo_client.py" />
     <entry file="file://$PROJECT_DIR$/templates/_charts_content_nav.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -793,9 +831,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apps/utils/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="8" lean-forward="false" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/Data_analysis_web/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2822">
+        <state relative-caret-position="3320">
           <caret line="176" column="35" lean-forward="false" selection-start-line="176" selection-start-column="35" selection-end-line="176" selection-end-column="35" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
@@ -805,30 +851,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/utils/PivotTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1727">
-          <caret line="120" column="11" lean-forward="false" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="11" />
+        <state relative-caret-position="1640">
+          <caret line="92" column="59" lean-forward="false" selection-start-line="92" selection-start-column="59" selection-end-line="92" selection-end-column="59" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
-            <marker date="1525922990573" expanded="true" signature="8385:9366" ph="..." />
-            <marker date="1525922990573" expanded="true" signature="9396:9562" ph="..." />
-            <marker date="1525922990573" expanded="true" signature="9401:9553" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/utils/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="8" lean-forward="false" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/utils/SaveDataToMongoDB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="143" column="15" lean-forward="false" selection-start-line="143" selection-start-column="15" selection-end-line="143" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="780">
+          <caret line="145" column="16" lean-forward="false" selection-start-line="145" selection-start-column="16" selection-end-line="145" selection-end-column="16" />
+          <folding>
+            <marker date="1525923534664" expanded="true" signature="1593:2110" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

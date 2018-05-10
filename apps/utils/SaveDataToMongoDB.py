@@ -141,5 +141,6 @@ if __name__ == '__main__':
     # 31:promotion-type   32：promotion-amount
     # # 设置不换行
     # pd.set_option('expand_frame_repr', False)
-    print 'test'
+
     mongoDB_createCollection()
+    print 'text2'

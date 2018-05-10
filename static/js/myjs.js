@@ -21,8 +21,8 @@ $(function() {
         success : function(datas) {//返回list数据并循环获取
             // var select = $("#account1");
             for (var i = 0; i < datas['account_list'].length; i++) {
-                $("#account1").append("<option value='"+datas['account_list'][i]+"'>"
-                    + datas['account_list'][i] + "</option>");
+                // $("#account1").append("<option value='"+datas['account_list'][i]+"'>"
+                //     + datas['account_list'][i] + "</option>");
                 $("#account2").append("<option value='"+datas['account_list'][i]+"'>"
                     + datas['account_list'][i] + "</option>");
             }
@@ -40,11 +40,13 @@ $('#datainput').click(function () {
     $('#panel1').empty();
     var file_csv = document.getElementById('datacsv').files[0];
     var file_xlsx = document.getElementById('dataxlsx').files[0];
-    var account1 = $('#account1').val();
+    var file_sku = document.getElementById('datasku').files[0];
+    // var account1 = $('#account1').val();
     var fd = new FormData();
-    fd.append('account1',account1);
+    // fd.append('account1',account1);
     fd.append('file_csv',file_csv);
     fd.append('file_xlsx',file_xlsx);
+    fd.append('file_sku',file_sku);
     $('#panel1').html("上传中，请稍等&nbsp;&nbsp;<i class='fa fa-spinner fa-pulse'></i>");
     $.ajax({
         url:"/data-input/",

@@ -22,14 +22,14 @@ def Connect_MongoDB():
     return db
 
 
-def db_get_df(db, account='.*', time_start = '1980-01-01', time_end = '2020-01-01', data_type='.*', sku_precise = False, style='.*', color='.*', size='.*'):
+def db_get_df(db, account='.*', time_start = '1980-01-01', time_end = '2020-01-01', data_type='.*', sku = False, style='.*', color='.*', size='.*'):
     '''
     连接mongoDB选出数据
     '''
-    if not sku_precise:
+    if not sku:
         rexExp = re.compile(r'^%s-%s-%s' % (style, color, size))
     else:
-        rexExp = re.compile(r'^%s' % style)
+        rexExp = re.compile(r'^%s' % sku)
     # 这里lte小于等于并没有取到等于的日期数据，故日期需要加一天
     try:
         mongoDB_data = db.order_refund_data.find(
@@ -48,7 +48,7 @@ def db_get_df(db, account='.*', time_start = '1980-01-01', time_end = '2020-01-0
     return df
 
 
-def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-01', time_end = '2050-01-01', data_type='.*', sku_precise = False, style='.*', color='.*', size='.*'):
+def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-01', time_end = '2050-01-01', data_type='.*', sku = False, style='.*', color='.*', size='.*'):
     '''
     返回json数据
     '''
@@ -58,7 +58,10 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
     if style == '.*'and color=='.*' and size=='.*':
         # 找到所有品类名的总览
         category_sku_list = db.sku.find({'account': {'$regex': account}})
-        category_name_list = set(pd.DataFrame(list(category_sku_list))['category'].sum())
+        category_name_list = []
+        for i in pd.DataFrame(list(category_sku_list))['category'].drop_duplicates():
+            category_name_list = category_name_list + i.split(',')
+        category_name_list = set(category_name_list)   # 去重
 
         if category != '.*':
             category_name_list = [category]
@@ -68,12 +71,12 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
 
             category_style_list = pd.DataFrame(list(category_sku_list)).drop_duplicates(['style'])['style']
 
-            aggregation_table_temp = []  # 临时储存数据，根据判断处理
+            aggregation_table_temp = []  # 临时储存数据，根据category判断处理
 
             for sku_style in category_style_list:
 
                 df = db_get_df(db, account=account, time_start=time_start, time_end=time_end, data_type=data_type,
-                               sku_precise=False,
+                               sku=False,
                                style=sku_style, color=color, size=size)
                 if not df.empty:
                     try:
@@ -90,9 +93,7 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                         refund_price_amount = pd.DataFrame(
                             list(df[df['transaction-type'] == 'Refund']['price-type'].get_values())).sum().sum()
 
-
-                        product_cost_weight = db.sku.find_one({'style': sku_style})
-                        freight = product_cost_weight['price'] * product_cost_weight['weight']
+                        freight = float(df['price'][0]) * float(df['weight'][0])  # 运费单价
 
                         # 退款率一般是字符串，影响下面的汇总，故要判断
                         if category != '.*':
@@ -125,22 +126,24 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                     aggregation_table.append(dict_data)
             else:
                 aggregation_table = aggregation_table_temp
-
+        # 排序后返回
+        from operator import itemgetter
+        aggregation_table = sorted(aggregation_table, key=itemgetter('销售数量'), reverse=True)
         df = pd.DataFrame(aggregation_table)
         plotly_pivot_table_html(df)
 
         return aggregation_table
 
     else:
-        sku_list = db.sku.find({'account': {'$regex': account},
-                                'category': {'$regex': category}
+        sku_list = db.order_refund_data.find({'account': {'$regex': account}
+                                ,'category': {'$regex': category}
                                 ,'style': {'$regex': style}
                                 ,'color': {'$regex': color}
                                 ,'size': {'$regex': size}})
         sku_list = list(pd.DataFrame(list(sku_list)).drop_duplicates('sku')['sku'])
 
         for sku in sku_list:
-            df = db_get_df(db, account=account, time_start=time_start, time_end=time_end, data_type=data_type, sku_precise=True, style=sku, color=color, size=size)
+            df = db_get_df(db, account=account, time_start=time_start, time_end=time_end, data_type=data_type, sku=sku, style=sku, color=color, size=size)
             if not df.empty:
                 try:
                     order_quantity_purchased = pd.DataFrame(list(df[df['transaction-type'] == 'Order']['quantity-purchased'].get_values())).sum()
@@ -151,32 +154,8 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                         refund_quantity_purchased = [0]
                     order_price_amount = pd.DataFrame(list(df[df['transaction-type'] == 'Order']['price-type'].get_values())).sum().sum()
                     refund_price_amount = pd.DataFrame(list(df[df['transaction-type'] == 'Refund']['price-type'].get_values())).sum().sum()
-                    if sku:
-                        try:
-                            if style == '.*':
-                                style = '[A-Z]{2,5}\d{2,6}'
-                            if color == '.*':
-                                color = '\d{1,2}[a-zA-Z]{0,2}|[a-zA-Z]{0,2}\d{0,2}'
-                            if size == '.*':
-                                size = '\d{0,2}[XSML]{0,4}\s{0,1}'
-                            r = re.compile(
-                                r'(%s)-(%s)-(%s)-{0,1}.{0,6}' % (style, color, size))
-                            re_style = r.match(sku).group(1)
-                        except:
-                            if style == '.*':
-                                style = '[A-Z]{2,5}\d{2,6}'
-                            if color == '.*':
-                                color = '\d{1,2}[a-zA-Z]{0,2}|[a-zA-Z]{0,2}\d{0,2}'
-                            if size == '.*':
-                                size = '\d{0,2}[XSML]{0,4}\s{0,1}'
-                            r2 = re.compile(
-                                r'(%s)-[74023]{4}-(%s)-(%s)-{0,1}.{0,6}' % (style, color, size))
-                            re_style = r2.match(sku).group(1)
-                    else:
-                        re_style = sku
-                    product_cost_weight = db.sku.find_one({'style':re_style})
-                    freight = product_cost_weight['price'] * product_cost_weight['weight']
 
+                    freight = float(df['price'][0]) * float(df['weight'][0])  # 运费单价
                     aggregation_table.append(
                         {'类型':sku,
                          '销售数量': order_quantity_purchased[0],
@@ -191,6 +170,7 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                     print sku
             else:
                 print sku
+        # 排序后返回
         from operator import itemgetter
         aggregation_table = sorted(aggregation_table, key=itemgetter('销售数量'), reverse=True)
 

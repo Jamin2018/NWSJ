@@ -5,13 +5,13 @@ import time
 from django.shortcuts import render,HttpResponse,redirect
 from utils import PyDataFun
 from utils import PyPlotly
-import pickle
 import json
 from django.views.decorators.csrf import csrf_exempt
-from sqlalchemy import create_engine
 from django.conf import settings
 from utils.SaveDataToMongoDB import *
 from utils import SaveDataToMongoDB, PivotTable
+import pandas as pd
+
 
 def DataIndexView(request):
     '''
@@ -31,14 +31,12 @@ def DataInputView(request):
     接收csv文件，将数据上传到mongoDB数据库
     '''
     if request.method == 'POST':
-        account = request.POST.get('account1')
+        # account = request.POST.get('account1')
         file_csv =request.FILES.get('file_csv')
         file_xlsx =request.FILES.get('file_xlsx')
+        file_sku =request.FILES.get('file_sku')
         try:
-            if account not in settings.ACCOUNT_LIST or not account:
-                time.sleep(1)
-                return HttpResponse(json.dumps({"err": -1, "msg": "请选择账户"}), content_type='application/json')
-            elif not file_csv or not file_xlsx :
+            if not file_csv or not file_xlsx :
                 if not file_csv:
                     time.sleep(1)
                     return HttpResponse(json.dumps({"err": -1, "msg": "请选择csv文件"}), content_type='application/json')
@@ -57,27 +55,16 @@ def DataInputView(request):
             return HttpResponse(json.dumps({"err": -1, "msg": "请选择正确的文件"}), content_type='application/json')
 
         try:
-            if account in settings.ACCOUNT_LIST:
-                path = os.getcwd()
-                product_cost_weight_path = os.getcwd() + r'/media/data/' + file_xlsx.name
-                filepath = path + r'/media/data/' + file_csv.name
-                with open(path + r'/media/data/' + file_csv.name,'wb') as f:
-                    for data in file_csv.chunks():
-                        f.write(data)
-                with open(path + r'/media/data/' + file_xlsx.name,'wb') as f:
-                    for data in file_xlsx.chunks():
-                        f.write(data)
-                df_csv = PyDataFun.get_df(filepath)
-                df_xlsx = PyDataFun.get_df(product_cost_weight_path)
-                # 存储数据到MongoDB
-                SaveDataToMongoDB.save_to_mongoDB(account, df_csv, df_xlsx)
-                return HttpResponse(json.dumps({"err": 0, "msg": "数据上传完毕"}),content_type='application/json')
-            else:
-                return HttpResponse(json.dumps({"err": -1, "msg": "请选择账户"}), content_type='application/json')
+            df_csv = pd.read_csv(file_csv)
+            df_xlsx = pd.read_excel(file_xlsx)
+            df_sku = pd.read_excel(file_sku)
+            # 存储数据到MongoDB
+            SaveDataToMongoDB.save_to_mongoDB(df_csv, df_xlsx, df_sku)
+            return HttpResponse(json.dumps({"err": 0, "msg": "数据上传完毕"}),content_type='application/json')
         except Exception as e:
             print (e)
             time.sleep(1)
-            return HttpResponse(json.dumps({"err": -1, "msg": "数据上传错误"}),content_type='application/json')
+            return HttpResponse(json.dumps({"err": -1, "msg": "数据上传失败"}),content_type='application/json')
 
 
 @csrf_exempt
@@ -182,18 +169,15 @@ def PivotTableJsonDataView(request):
     time_start = date[:(len(date)/2)].strip()
     time_end = date[(len(date)/2) +1:].strip()
     account = request.GET.get('account','.*')
+    category = request.GET.get('category', '.*')
     style = request.GET.get('style','.*')
     color = request.GET.get('color','.*')
     size = request.GET.get('size','.*')
-    category = request.GET.get('category','.*')
 
+    all_data = PivotTable.data_aggregation_table(account, category, time_start=time_start, time_end=time_end,
+                                                 data_type='.*', style=style, color=color, size=size)
     start_data = (page - 1) * limit
     end_data = page * limit
-
-    # if category != '0':
-    #     all_data = PivotTable.data_aggregation_table_category(account, category,time_start = time_start, time_end = time_end, data_type='.*', style=style, color=color, size=size)
-    # else:
-    all_data = PivotTable.data_aggregation_table(account,category, time_start = time_start, time_end = time_end, data_type='.*', style=style, color=color, size=size)
     data = all_data[start_data:end_data]
 
     return HttpResponse(json.dumps({"code": 0, "msg": 'OK', "count":len(all_data), "data":data}), content_type='application/json')

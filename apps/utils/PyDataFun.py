@@ -18,6 +18,7 @@ def get_df(filename, usecols = None):
         df = pd.read_excel(filename, usecols=usecols)
     return (df)
 
+
 def get_sku_name_list(df):
     '''
     获得sku名字列表

@@ -7,14 +7,14 @@
                 <div class="datas-file">
                     <form id="dataform" name="dataform" method="post" action="{% url 'data-input' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="row file-up-inner">
-                            <div class="col-xs-4" style="text-align: right">
-                                <button class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">选择账户</button>
-                            </div>
-                            <div class="col-xs-6">
-                                <select id="account1" class="selectpicker form-control" name="account1" data-live-search="false"></select>
-                            </div>
-                        </div>
+{#                        <div class="row file-up-inner">#}
+{#                            <div class="col-xs-4" style="text-align: right">#}
+{#                                <button class="btn btn-success" style="width: 80px" type="button" value=""  onclick="">选择账户</button>#}
+{#                            </div>#}
+{#                            <div class="col-xs-6">#}
+{#                                <select id="account1" class="selectpicker form-control" name="account1" data-live-search="false"></select>#}
+{#                            </div>#}
+{#                        </div>#}
                         <div class="row file-up-inner">
                             <div class="col-xs-4" style="text-align: right">
                                 <button class="btn btn-success" style="width: 80px" type="button" value="上传csv数据"  onclick="document.dataform.datacsv.click()">csv数据</button>
@@ -30,7 +30,17 @@
                             </div>
                             <div class="col-xs-6">
                                 <input type="file" name="dataxlsx" id="dataxlsx" style="display:none" onChange="document.dataform.dataname2.value=this.value">
-                                <input id="f_upload" class="form-control"name="dataname2" readonly>
+                                <input class="form-control"name="dataname2" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row file-up-inner">
+                            <div class="col-xs-4" style="text-align: right">
+                                <button class="btn btn-success" style="width: 80px" type="button" value="上传SKU数据"  onclick="document.dataform.datasku.click()">SKU数据</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="file" name="datasku" id="datasku" style="display:none" onChange="document.dataform.dataname3.value=this.value">
+                                <input  class="form-control" name="dataname3" readonly>
                             </div>
                         </div>
                         <div class="row file-up-inner">

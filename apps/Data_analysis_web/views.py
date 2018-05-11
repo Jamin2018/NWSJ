@@ -57,8 +57,10 @@ def DataInputView(request):
         try:
             if file_csv.name[-3:] == 'csv':
                 df_csv = pd.read_csv(file_csv)
-            else:
+            elif file_csv.name[-4:] == 'xlsx':
                 df_csv = pd.read_excel(file_csv)
+            elif file_csv.name[-3:] == 'txt':
+                df_csv = pd.read_table(file_csv)
 
 
             df_xlsx = pd.read_excel(file_xlsx)

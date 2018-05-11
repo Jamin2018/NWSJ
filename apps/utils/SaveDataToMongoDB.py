@@ -14,18 +14,20 @@ def save_sku_to_MongoDB(df_xlsx, df_sku, db):
     '''
     把sku系列详细名字数据存入MongoDB
     '''
+    print df_xlsx
+    print df_sku
     for dic in df_sku.to_dict('records'):
         try:
-            dic['price'] = df_xlsx[df_xlsx['style'] == dic['style']]['price'].values[0]
-            dic['weight'] = df_xlsx[df_xlsx['style'] == dic['style']]['weight'].values[0]
+            dic['price'] = float(df_xlsx[df_xlsx['style'] == dic['style']]['price'].values[0])
+            dic['weight'] = float(df_xlsx[df_xlsx['style'] == dic['style']]['weight'].values[0])
             # 注意将数字转成字符串，不然在取数据的时候用正则匹配不到
             dic['size'] = str(dic['size'])
             dic['color'] = str(dic['color'])
-
             db.sku.update({'account':dic['account'],'sku':dic['sku'],'style':dic['style'],'color':dic['color'],'size':dic['size']},
                                 {'$set': dic}, True)
         except Exception as e:
-            print e
+            print dic
+            print 'save_sku_to_MongoDB函数：',e
 
 
 def get_data_dict(df_csv, df_xlsx, df_sku, db):
@@ -141,6 +143,5 @@ if __name__ == '__main__':
     # 31:promotion-type   32：promotion-amount
     # # 设置不换行
     # pd.set_option('expand_frame_repr', False)
-
+    print 'test'
     mongoDB_createCollection()
-    print 'text2'

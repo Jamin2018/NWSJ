@@ -148,7 +148,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'meida')
 
 # 添加账户
-ACCOUNT_LIST = ['admin',]
+ACCOUNT_LIST = ['admin','MY']
 
 
 RANDON_CATEGORY = {

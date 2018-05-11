@@ -35,27 +35,32 @@ def DataInputView(request):
         file_csv =request.FILES.get('file_csv')
         file_xlsx =request.FILES.get('file_xlsx')
         file_sku =request.FILES.get('file_sku')
-        try:
-            if not file_csv or not file_xlsx :
-                if not file_csv:
-                    time.sleep(1)
-                    return HttpResponse(json.dumps({"err": -1, "msg": "请选择csv文件"}), content_type='application/json')
-                elif not file_xlsx:
-                    time.sleep(1)
-                    return HttpResponse(json.dumps({"err": -1, "msg": "请选择xlsx文件"}), content_type='application/json')
-            elif file_csv.name[-3:] != 'csv' or file_xlsx.name[-4:] != 'xlsx':
-                if file_csv.name[-3:] != 'csv':
-                    time.sleep(1)
-                    return HttpResponse(json.dumps({"err": -1, "msg": "请传入正确的csv数据"}),content_type='application/json')
-                elif file_xlsx.name[-4:] != 'xlsx':
-                    time.sleep(1)
-                    return HttpResponse(json.dumps({"err": -1, "msg": "请传入正确的运费数据"}),content_type='application/json')
-        except:
-            time.sleep(1)
-            return HttpResponse(json.dumps({"err": -1, "msg": "请选择正确的文件"}), content_type='application/json')
+        # try:
+        #     if not file_csv or not file_xlsx :
+        #         if not file_csv:
+        #             time.sleep(1)
+        #             return HttpResponse(json.dumps({"err": -1, "msg": "请选择csv文件"}), content_type='application/json')
+        #         elif not file_xlsx:
+        #             time.sleep(1)
+        #             return HttpResponse(json.dumps({"err": -1, "msg": "请选择xlsx文件"}), content_type='application/json')
+        #     elif file_csv.name[-3:] != 'csv' or file_xlsx.name[-4:] != 'xlsx':
+        #         if file_csv.name[-3:] != 'csv':
+        #             time.sleep(1)
+        #             return HttpResponse(json.dumps({"err": -1, "msg": "请传入正确的csv数据"}),content_type='application/json')
+        #         elif file_xlsx.name[-4:] != 'xlsx':
+        #             time.sleep(1)
+        #             return HttpResponse(json.dumps({"err": -1, "msg": "请传入正确的运费数据"}),content_type='application/json')
+        # except:
+        #     time.sleep(1)
+        #     return HttpResponse(json.dumps({"err": -1, "msg": "请选择正确的文件"}), content_type='application/json')
 
         try:
-            df_csv = pd.read_csv(file_csv)
+            if file_csv.name[-3:] == 'csv':
+                df_csv = pd.read_csv(file_csv)
+            else:
+                df_csv = pd.read_excel(file_csv)
+
+
             df_xlsx = pd.read_excel(file_xlsx)
             df_sku = pd.read_excel(file_sku)
             # 存储数据到MongoDB

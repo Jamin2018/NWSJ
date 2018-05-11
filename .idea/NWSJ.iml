@@ -15,7 +15,7 @@
       <sourceFolder url="file://$MODULE_DIR$/apps" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/extra_apps" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 2.7.14 virtualenv at C:\Users\Jamin\Venv_NWSJ" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 2.7.14 virtualenv at C:\Users\Administrator\venv_Anaconda" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

@@ -26,19 +26,25 @@ def db_get_df(db, account='.*', time_start = '1980-01-01', time_end = '2020-01-0
     '''
     连接mongoDB选出数据
     '''
-    if not sku:
-        rexExp = re.compile(r'^%s-%s-%s' % (style, color, size))
-    else:
-        rexExp = re.compile(r'^%s' % sku)
     # 这里lte小于等于并没有取到等于的日期数据，故日期需要加一天
     try:
-        mongoDB_data = db.order_refund_data.find(
-            {'posted-date':{'$gte' : time_start , '$lte' : time_end},
-             'transaction-type': {'$regex':data_type},
-             'sku': rexExp,
-             'account':{'$regex':account},
-             })
-
+        if not sku:
+            mongoDB_data = db.order_refund_data.find(
+                {'posted-date':{'$gte' : time_start , '$lte' : time_end},
+                 'transaction-type': {'$regex':data_type},
+                 'style': {'$regex':style},
+                 'color': {'$regex':color},
+                 'size': {'$regex':size},
+                 'account':{'$regex':account},
+                 })
+        else:
+            rexExp = re.compile(r'^%s' % sku)
+            mongoDB_data = db.order_refund_data.find(
+                {'posted-date':{'$gte' : time_start , '$lte' : time_end},
+                 'transaction-type': {'$regex':data_type},
+                 'sku': rexExp,
+                 'account':{'$regex':account},
+                 })
         df = pd.DataFrame(list(mongoDB_data))
         # print df
         # 处理时间数据，生成新的CSV数据表
@@ -70,7 +76,6 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                                              'category': {'$regex': category_name}})
 
             category_style_list = pd.DataFrame(list(category_sku_list)).drop_duplicates(['style'])['style']
-
             aggregation_table_temp = []  # 临时储存数据，根据category判断处理
 
             for sku_style in category_style_list:
@@ -78,18 +83,22 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                 df = db_get_df(db, account=account, time_start=time_start, time_end=time_end, data_type=data_type,
                                sku=False,
                                style=sku_style, color=color, size=size)
+
                 if not df.empty:
                     try:
                         order_quantity_purchased = pd.DataFrame(
                             list(df[df['transaction-type'] == 'Order']['quantity-purchased'].get_values())).sum()
                         if order_quantity_purchased.empty:
                             order_quantity_purchased = [0]
+
                         refund_quantity_purchased = pd.DataFrame(
                             list(df[df['transaction-type'] == 'Refund']['quantity-purchased'].get_values())).sum()
                         if refund_quantity_purchased.empty:
                             refund_quantity_purchased = [0]
+
                         order_price_amount = pd.DataFrame(
                             list(df[df['transaction-type'] == 'Order']['price-type'].get_values())).sum().sum()
+
                         refund_price_amount = pd.DataFrame(
                             list(df[df['transaction-type'] == 'Refund']['price-type'].get_values())).sum().sum()
 
@@ -99,22 +108,32 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                         if category != '.*':
                             refund_rate = '%.2f%%' % (
                                 (refund_quantity_purchased[0] / order_quantity_purchased[0]) * 100)
+                            if refund_rate == float('inf'):
+                                refund_rate = '100%'
                         else:
                             refund_rate = (refund_quantity_purchased[0] / order_quantity_purchased[0]) * 100
-                        aggregation_table_temp.append(
-                            {'类型': sku_style,
+                            if refund_rate == float('inf'):
+                                refund_rate = 100
+
+                        d =  {'类型': sku_style,
                              '销售数量': order_quantity_purchased[0],
                              '退款数量': refund_quantity_purchased[0],
                              '退款率': refund_rate,
                              '销售金额': round(order_price_amount, 2),
                              '退款金额': round(refund_price_amount, 2),
                              '运费成本': round(((order_quantity_purchased[0] + refund_quantity_purchased[0]) * freight), 2)
-                             })
+                             }
+
+
+                        aggregation_table_temp.append(d)
                     except:
                         print sku_style
+
             if category == '.*':
                 Serise = pd.DataFrame(aggregation_table_temp).sum()
-                Serise['退款率'] = '%.2f%%' % (Serise['退款率'] / len(aggregation_table_temp))
+                if Serise.empty:
+                    continue
+                Serise['退款率'] = '%.2f%%' % (Serise['退款数量'] / Serise['销售数量'] * 100)
                 df = pd.DataFrame(Serise)
                 df = df.T
                 df = df.drop('类型', 1)
@@ -140,7 +159,9 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                                 ,'style': {'$regex': style}
                                 ,'color': {'$regex': color}
                                 ,'size': {'$regex': size}})
+
         sku_list = list(pd.DataFrame(list(sku_list)).drop_duplicates('sku')['sku'])
+        print sku_list
 
         for sku in sku_list:
             df = db_get_df(db, account=account, time_start=time_start, time_end=time_end, data_type=data_type, sku=sku, style=sku, color=color, size=size)

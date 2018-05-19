@@ -21,13 +21,13 @@ layui.use(['laydate','form','table'], function(){
         ,page: true //开启分页
         ,limit: 15
         ,cols: [[ //表头
-            {field: '类型', title: '类型', width:'14%', sort: true, fixed: 'left', style:'cursor:pointer',event:'skip'}
-            ,{field: '销售数量', title: '销售数量', width:'14%', sort: true}
-            ,{field: '销售金额', title: '销售金额', width:'14%', sort: true}
-            ,{field: '退款数量', title: '退款数量', width:'14%', sort: true}
-            ,{field: '退款金额', title: '退款金额', width: '14%', sort: true}
-            ,{field: '退款率', title: '退款率', width: '14%', sort: true}
-            ,{field: '运费成本', title: '运费成本', width: '14%', sort: true}
+            {field: 'type', title: '类型', width:'14%', sort: true, fixed: 'left', style:'cursor:pointer',event:'skip'}
+            ,{field: 'order_number', title: '销售数量', width:'14%', sort: true}
+            ,{field: 'order_amount', title: '销售金额', width:'14%', sort: true}
+            ,{field: 'refund_number', title: '退款数量', width:'14%', sort: true}
+            ,{field: 'refund_amount', title: '退款金额', width: '14%', sort: true}
+            ,{field: 'refund_rate', title: '退款率', width: '14%', sort: true}
+            ,{field: 'freight_cost', title: '运费成本', width: '14%', sort: true}
         ]]
         ,id:'pivot_table'
         ,done:function (res,curr,count) {

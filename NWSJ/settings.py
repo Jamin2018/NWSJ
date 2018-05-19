@@ -33,8 +33,10 @@ SECRET_KEY = 'vt2bx9hf2b2txl+ac(d(*suj23_zzk_t%hp2%cb(=!yw20!-)x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
+# 设置能被其他项目iframe引用
+X_FRAME_OPTIONS = 'ALLOWALL'
 
 AUTH_USER_MODEL = 'users.UserProfile'
 

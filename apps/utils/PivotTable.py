@@ -115,13 +115,13 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                             if refund_rate == float('inf'):
                                 refund_rate = 100
 
-                        d =  {'类型': sku_style,
-                             '销售数量': order_quantity_purchased[0],
-                             '退款数量': refund_quantity_purchased[0],
-                             '退款率': refund_rate,
-                             '销售金额': round(order_price_amount, 2),
-                             '退款金额': round(refund_price_amount, 2),
-                             '运费成本': round(((order_quantity_purchased[0] + refund_quantity_purchased[0]) * freight), 2)
+                        d =  {'type': sku_style,
+                             'order_number': order_quantity_purchased[0],
+                             'refund_number': refund_quantity_purchased[0],
+                             'refund_rate': refund_rate,
+                             'order_amount': round(order_price_amount, 2),
+                             'refund_amount': round(refund_price_amount, 2),
+                             'freight_cost': round(((order_quantity_purchased[0] + refund_quantity_purchased[0]) * freight), 2)
                              }
 
 
@@ -133,21 +133,21 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                 Serise = pd.DataFrame(aggregation_table_temp).sum()
                 if Serise.empty:
                     continue
-                Serise['退款率'] = '%.2f%%' % (Serise['退款数量'] / Serise['销售数量'] * 100)
+                Serise['refund_rate'] = '%.2f%%' % (Serise['refund_number'] / Serise['order_number'] * 100)
                 df = pd.DataFrame(Serise)
                 df = df.T
-                df = df.drop('类型', 1)
-                df['类型'] = category_name
+                df = df.drop('type', 1)
+                df['type'] = category_name
                 for dict_data in df.to_dict('records'):
-                    dict_data['销售金额'] = round(dict_data['销售金额'],1)
-                    dict_data['退款金额'] = round(dict_data['退款金额'],1)
-                    dict_data['运费成本'] = round(dict_data['运费成本'],1)
+                    dict_data['order_amount'] = round(dict_data['order_amount'],1)
+                    dict_data['refund_amount'] = round(dict_data['refund_amount'],1)
+                    dict_data['freight_cost'] = round(dict_data['freight_cost'],1)
                     aggregation_table.append(dict_data)
             else:
                 aggregation_table = aggregation_table_temp
         # 排序后返回
         from operator import itemgetter
-        aggregation_table = sorted(aggregation_table, key=itemgetter('销售数量'), reverse=True)
+        aggregation_table = sorted(aggregation_table, key=itemgetter('order_number'), reverse=True)
         df = pd.DataFrame(aggregation_table)
         plotly_pivot_table_html(df)
 
@@ -178,13 +178,13 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
 
                     freight = float(df['price'][0]) * float(df['weight'][0])  # 运费单价
                     aggregation_table.append(
-                        {'类型':sku,
-                         '销售数量': order_quantity_purchased[0],
-                         '退款数量': refund_quantity_purchased[0],
-                         '退款率': '%.2f%%' % ((refund_quantity_purchased[0]/order_quantity_purchased[0]) * 100),
-                         '销售金额': round(order_price_amount, 2),
-                         '退款金额': round(refund_price_amount, 2),
-                         '运费成本': round(((order_quantity_purchased[0] + refund_quantity_purchased[0]) * freight), 2)
+                        {'type':sku,
+                         'order_number': order_quantity_purchased[0],
+                         'refund_number': refund_quantity_purchased[0],
+                         'refund_rate': '%.2f%%' % ((refund_quantity_purchased[0]/order_quantity_purchased[0]) * 100),
+                         'order_amount': round(order_price_amount, 2),
+                         'refund_amount': round(refund_price_amount, 2),
+                         'freight_cost': round(((order_quantity_purchased[0] + refund_quantity_purchased[0]) * freight), 2)
                          })
                 except Exception as e:
                     print e
@@ -193,7 +193,7 @@ def data_aggregation_table(account='.*', category = '.*',time_start = '1980-01-0
                 print sku
         # 排序后返回
         from operator import itemgetter
-        aggregation_table = sorted(aggregation_table, key=itemgetter('销售数量'), reverse=True)
+        aggregation_table = sorted(aggregation_table, key=itemgetter('order_number'), reverse=True)
 
         df = pd.DataFrame(aggregation_table)
         plotly_pivot_table_html(df)
@@ -207,31 +207,31 @@ def plotly_pivot_table_html(df):
     :return:
     '''
     trace4 = go.Bar(
-        x=df['类型'],
-        y=np.abs(df['销售数量']),
+        x=df['type'],
+        y=np.abs(df['order_number']),
         name='销售数量'
     )
     trace2 = go.Bar(
-        x=df['类型'],
-        y=df['销售金额'],
+        x=df['type'],
+        y=df['order_amount'],
         name='销售金额'
     )
 
     trace5 = go.Bar(
-        x=df['类型'],
-        y=np.abs(df['退款数量']),
+        x=df['type'],
+        y=np.abs(df['refund_number']),
         name='退款数量'
     )
 
     trace3 = go.Bar(
-        x=df['类型'],
-        y=np.abs(df['退款金额']),
+        x=df['type'],
+        y=np.abs(df['refund_amount']),
         name='退款金额'
     )
 
     trace1 = go.Bar(
-        x=df['类型'],
-        y=np.abs(df['运费成本']),
+        x=df['type'],
+        y=np.abs(df['freight_cost']),
         name='运费成本'
     )
 
